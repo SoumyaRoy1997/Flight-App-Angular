@@ -1,0 +1,136 @@
+<div class="dialog">
+    <mat-dialog-content class="mat-typography">
+        <div class="card">
+            <div class="card-header card-header-danger">
+                    <h2 mat-dialog-title class="float-centre">Add Passengers</h2>
+            </div>
+            <div class="card-body">
+                
+                        <form [formGroup]="passengerForm">
+                                <div class="float-left">
+                                    <p>
+                          <mat-form-field appearance="outline">
+                          <mat-label form="Name">Name</mat-label>
+                          <input matInput placeholder="Name" formControlName="Name" type="text" > 
+                          </mat-form-field>
+                          <mat-divider></mat-divider>
+                          </p>
+                          <p>
+                          <mat-form-field appearance="outline" style="width:20vw">
+                          <mat-label form="bookingID">Booking ID</mat-label>
+                          <input matInput placeholder="Booking ID" formControlName="bookingID" type="text">
+                          </mat-form-field>
+                          <mat-divider></mat-divider>
+                          </p>
+                          <p>
+                            <mat-form-field appearance="outline" style="width:20vw">
+                            <mat-label form="passengerID">Passenger ID</mat-label>
+                            <input matInput placeholder="Passenger ID" formControlName="passengerID" type="text">
+                            </mat-form-field>
+                            <mat-divider></mat-divider>
+                            </p>
+                          <p>
+                           <mat-form-field appearance="outline">
+                          <mat-label form="age">Age</mat-label>
+                          <input matInput placeholder="Age" formControlName="age" type="text"> 
+                          </mat-form-field>
+                          <mat-divider></mat-divider>
+                          </p>
+                          <p>
+                                <mat-form-field >
+                               <mat-label form="dob">DOB</mat-label>
+                               <input matInput placeholder="DOB" formControlName="dob" type="text"> 
+                            </mat-form-field>
+                            <mat-divider></mat-divider> 
+                               </p>
+                          <p>
+                           <mat-form-field appearance="outline">
+                          <mat-label form="seatPref">Seat Preference</mat-label>
+                          <input matInput placeholder="Seat Preference" formControlName="seatPref" type="text"> 
+                          </mat-form-field>
+                          <mat-divider></mat-divider>
+                          </p>
+                           <p>
+                          <mat-form-field appearance="outline" style="width:22vw">
+                          <mat-label form="pnr">PNR</mat-label>
+                          <input matInput placeholder="PNR" formControlName="pnr" type="text"> 
+                          </mat-form-field>
+                          <mat-divider></mat-divider>
+                          </p>
+                                </div>
+                          <div class="float-right">
+                            
+                          <p>
+                                <mat-form-field appearance="outline">
+                               <mat-label form="address">Address</mat-label>
+                               <input matInput placeholder="Address" formControlName="address" type="text"> 
+                               </mat-form-field>
+                               <mat-divider></mat-divider>
+                               </p>
+                          <p>
+                          
+                          <mat-label form="seat_number">Seat Number</mat-label>
+                          <mat-select formControlName="seat_number">
+                            <mat-option *ngFor="let seats of availableSeats" [value]="seats">
+                              {{seats}}
+                            </mat-option>
+                          </mat-select>
+                          
+                          
+                          <mat-divider></mat-divider>
+                          </p>
+                          <p>
+                          <mat-slide-toggle
+                          formControlName="meals">
+                          Meals
+                            </mat-slide-toggle>
+                            <mat-divider></mat-divider>
+                          </p>
+                          <p>
+                          <mat-slide-toggle #ancillaryServices
+                          formControlName="ancillaryServices">
+                          Ancillary Services
+                            </mat-slide-toggle>
+                            <mat-divider></mat-divider>
+                          </p>
+                          <p>                                    
+                          <mat-slide-toggle
+                          formControlName="passport">
+                          Passport
+                            </mat-slide-toggle>
+                            <mat-divider></mat-divider>
+                          </p>
+                            <p>
+                          <mat-slide-toggle
+                          formControlName="wheelchair">
+                          Wheelchair
+                            </mat-slide-toggle>
+                            <mat-divider></mat-divider>
+                          </p>
+                           <p>
+                          <mat-slide-toggle
+                          formControlName="infants">
+                          Infants
+                            </mat-slide-toggle>
+                            <mat-divider></mat-divider>
+                        </p>
+                          <p>
+                            <mat-slide-toggle
+                            formControlName="checkin">
+                            Checkin
+                              </mat-slide-toggle>
+                              <mat-divider></mat-divider>
+                        </p>
+                          </div>
+                          
+                          <!-- <button mat-button type="submit">Update</button> -->
+                        </form>          
+            </div>
+       </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+        <button mat-button (click)="AddPassenger(passengerForm)" class="btn btn-success" color="accent" cdkFocusInitial>Add Passenger</button>
+        <button mat-button mat-dialog-close class="btn btn-danger" color="primary">Cancel</button>
+</mat-dialog-actions>
+ </div>
+

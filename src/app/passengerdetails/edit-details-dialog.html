@@ -1,0 +1,182 @@
+<div class="dialog">
+                <mat-dialog-content class="mat-typography">
+                    <div class="card">
+                        <div class="card-header card-header-danger">
+                                <h2 mat-dialog-title class="float-centre">Details for {{data.passenger.name}}</h2>
+                        </div>
+                        <div class="card-body">
+                            
+                                    <form [formGroup]="passengerForm">
+                                            <div class="float-left">
+                                                <p>
+                                      <mat-form-field appearance="outline">
+                                      <mat-label form="Name">Name</mat-label>
+                                      <input matInput placeholder="Name" formControlName="Name" type="text" > 
+                                      </mat-form-field>
+                                      <mat-divider></mat-divider>
+                                      </p>
+                                      <p>
+                                      <mat-form-field appearance="outline" style="width:20vw">
+                                      <mat-label form="bookingID">Booking ID</mat-label>
+                                      <input matInput placeholder="Booking ID" formControlName="bookingID" type="text">
+                                      </mat-form-field>
+                                      <mat-divider></mat-divider>
+                                      </p>
+                                      <p>
+                                       <mat-form-field appearance="outline">
+                                      <mat-label form="age">Age</mat-label>
+                                      <input matInput placeholder="Age" formControlName="age" type="text"> 
+                                      </mat-form-field>
+                                      <mat-divider></mat-divider>
+                                      </p>
+                                      <p>
+                                            <mat-form-field >
+                                           <mat-label form="dob">DOB</mat-label>
+                                           <input matInput placeholder="DOB" formControlName="dob" type="text"> 
+                                        </mat-form-field>
+                                        <mat-divider></mat-divider> 
+                                           </p>
+                                      <p>
+                                       <mat-form-field appearance="outline">
+                                      <mat-label form="seatPref">Seat Preference</mat-label>
+                                      <input matInput placeholder="Seat Preference" formControlName="seatPref" type="text"> 
+                                      </mat-form-field>
+                                      <mat-divider></mat-divider>
+                                      </p>
+                                       <p>
+                                      <mat-form-field appearance="outline" style="width:22vw">
+                                      <mat-label form="pnr">PNR</mat-label>
+                                      <input matInput placeholder="PNR" formControlName="pnr" type="text"> 
+                                      </mat-form-field>
+                                      <mat-divider></mat-divider>
+                                      </p>
+                                            </div>
+                                      <div class="float-right">
+                                        
+                                      <p>
+                                            <mat-form-field appearance="outline">
+                                           <mat-label form="address">Address</mat-label>
+                                           <input matInput placeholder="Address" formControlName="address" type="text"> 
+                                           </mat-form-field>
+                                           <mat-divider></mat-divider>
+                                           </p>
+                                      <p>
+                                       <mat-form-field appearance="outline">
+                                      <mat-label form="seat_number">Seat Number</mat-label>
+                                      <input matInput placeholder="Seat Number" formControlName="seat_number" type="text"> 
+                                      </mat-form-field>
+                                      <mat-divider></mat-divider>
+                                      </p>
+                                      <p>
+                                      <mat-slide-toggle
+                                      formControlName="meals">
+                                      Meals
+                                        </mat-slide-toggle>
+                                        <mat-expansion-panel *ngIf="data.passenger.passengerflightdetails.meals && userrole==2">
+                                          <mat-expansion-panel-header>
+                                            <mat-panel-title>
+                                              Special Meals
+                                              </mat-panel-title>
+                                            </mat-expansion-panel-header>
+                                            <ng-container *ngIf="isAddMeal">
+                                                <mat-list> 
+                                              <mat-list-item *ngFor="let j of addMeals"  [@list2]>
+                                                  <span class="material-icons" (click)="AddMeals(j)" style="cursor: pointer; color:blue;" >
+                                                      add_circle
+                                                      </span > <strong style="color: chocolate;">{{j.mealName}}</strong>
+                                                </mat-list-item>
+                                                </mat-list>
+                                                </ng-container>
+                                            <mat-list>
+                                              <mat-list-item *ngFor="let i of passengerMeals"  [@list2]>
+                                                        <span class="material-icons" *ngIf="isRemoveMeal" (click)="RemoveMeal(i)" style="cursor: pointer; color: red;" >
+                                                            cancel
+                                                            </span ><strong>{{i.mealName}}</strong>
+                                              </mat-list-item>
+                                            </mat-list>
+                                            <div *ngIf="passengerMeals.length>0">
+                                                <button mat-button class="bt btn-warning" (click)="isRemoveMeals()">Delete Meals</button>
+                                                <button mat-button class="bt btn-primary" (click)="isAddMeals()">Add Meals</button>
+                                              </div>
+                                              <div *ngIf="passengerMeals.length==0">
+                                                <h3><strong>No Meals selected for {{data.passenger.name}}</strong></h3>
+                                                  <button mat-button class="bt btn-primary" (click)="isAddMeals()">Add Meals</button>
+                                              </div>
+                                            </mat-expansion-panel>
+                                        <mat-divider></mat-divider>
+                                      </p>
+                                      <p>
+                                      <mat-slide-toggle #ancillaryServices
+                                      formControlName="ancillaryServices">
+                                      Ancillary Services
+                                        </mat-slide-toggle>
+                                        <mat-expansion-panel *ngIf="data.passenger.passengerflightdetails.ancillaryServices && userrole==2">
+                                            <mat-expansion-panel-header>
+                                              <mat-panel-title>
+                                                  Ancillary Services
+                                                </mat-panel-title>
+                                              </mat-expansion-panel-header>
+                                              <ng-container *ngIf="isAdding">
+                                                  <mat-list [@list1]> 
+                                                <mat-list-item *ngFor="let j of addServices">
+                                                    <span class="material-icons" (click)="Add(j)" style="cursor: pointer; color:blue;" >
+                                                        add_circle
+                                                        </span > <strong style="color: chocolate;">{{j.serviceName}}</strong>
+                                                  </mat-list-item>
+                                                  </mat-list>
+                                                  </ng-container>
+                                              <mat-list [@list2]>
+                                                <mat-list-item *ngFor="let i of AncillaryService">
+                                                          <span class="material-icons" *ngIf="isRemoved" (click)="Remove(i)" style="cursor: pointer; color: red;" >
+                                                              cancel
+                                                              </span ><strong>{{i.serviceName}}</strong>
+                                                </mat-list-item>
+                                              </mat-list>
+                                              <div *ngIf="AncillaryService.length>0">
+                                                  <button mat-button class="bt btn-warning" (click)="RemoveService()">Delete Services</button>
+                                                  <button mat-button class="bt btn-primary" (click)="AddService()">Add Services</button>
+                                                </div>
+                                                <div *ngIf="AncillaryService.length==0">
+                                                  <h3><strong>No Services selected for {{data.passenger.name}}</strong></h3>
+                                                    <button mat-button class="bt btn-primary" (click)="AddService()">Add Services</button>
+                                                </div>
+                                              </mat-expansion-panel>
+                                        <mat-divider></mat-divider>
+                                      </p>
+                                      <p>                                    
+                                      <mat-slide-toggle
+                                      formControlName="passport">
+                                      Passport
+                                        </mat-slide-toggle>
+                                        <mat-divider></mat-divider>
+                                      </p>
+                                        <p>
+                                      <mat-slide-toggle
+                                      formControlName="wheelchair">
+                                      Wheelchair
+                                        </mat-slide-toggle>
+                                        <mat-divider></mat-divider>
+                                      </p>
+                                       <p>
+                                      <mat-slide-toggle
+                                      formControlName="infants">
+                                      Infants
+                                        </mat-slide-toggle>
+                                        <mat-divider></mat-divider>
+                                    </p>
+                                      <p>
+                                     
+                                    </p>
+                                      </div>
+                                      
+                                      <!-- <button mat-button type="submit">Update</button> -->
+                                    </form>          
+                        </div>
+                   </div>
+            </mat-dialog-content>
+            <mat-dialog-actions align="end">
+                    <button mat-button [mat-dialog-close]="passengerForm" class="btn btn-success" color="accent" cdkFocusInitial>Update</button>
+                    <button mat-button mat-dialog-close class="btn btn-danger" color="primary">Cancel</button>
+            </mat-dialog-actions>
+             </div>
+

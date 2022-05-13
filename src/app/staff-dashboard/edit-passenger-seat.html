@@ -1,0 +1,23 @@
+<div class="dialog">
+    <mat-dialog-content class="mat-typography">
+    <div class="card">
+    <div class="card-header card-header-danger">
+    <h2  mat-dialog-title class="float-centre">Passenger for:<strong><h5 mat-dialog-title class="float-centre" style="color: chocolate;">{{data.seatNumber}}</h5></strong></h2>
+    </div>
+    <div class="card-body">
+            <form [formGroup]="data.seatForm">
+                <mat-form-field appearance="outline" style="width:20vw">
+                    <mat-label form="name">Name</mat-label>
+                    <input matInput placeholder="Name" formControlName="name" type="text" #name>
+                    </mat-form-field>
+                    <mat-divider></mat-divider>
+            </form>
+    </div>
+    </div>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+        <button mat-button (click)="updatePassenger(name.value)" class="btn btn-success" color="accent" mat-dialog-close cdkFocusInitial>Update</button>
+        <button mat-button mat-dialog-close class="btn btn-danger" color="primary">Cancel</button>
+</mat-dialog-actions>
+    </div>
+    

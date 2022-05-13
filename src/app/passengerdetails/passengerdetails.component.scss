@@ -1,0 +1,82 @@
+@import "../_shared/shared.scss";
+@import "../_shared/table.scss";
+
+
+
+
+.nav-link
+  {
+    display: block;
+    padding: .5rem 1rem;
+    list-style: none;
+     
+  }
+  .nav{
+    list-style-position: initial;
+    list-style-image: initial;
+    list-style-type: none;
+  }
+  
+  
+  .example-is-mobile .example-toolbar {
+    position: fixed;
+    /* Make sure the toolbar will stay on top of the content as it scrolls past. */
+    z-index: 2;
+    background-color: #ddd;
+  }
+  
+  h1.example-app-name {
+    margin-left: 8px;
+  }
+  
+  .example-sidenav-container {
+    flex: 1;
+    background-image: url($myimageUrl);
+    @include _backGroundImage();
+    overflow: auto;
+    color: bisque;
+    max-width: 100%;
+  }
+  
+  .example-is-mobile .example-sidenav-container {
+       background-color: #ddd;
+       flex: 1 0 auto;
+  }
+  
+  
+ 
+  /* Add media queries for responsiveness - when the screen is 500px wide or less, stack the links on top of each other */
+  @media screen and (max-width: 500px) {
+    .example-toolbar a {
+      float: none;
+      display: block;
+      text-align: left;
+    }
+    .header-right {
+      float: none;
+    }
+  }
+  .form{
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .mat-sidenav-container {
+    height: auto;
+    @extend .form;
+  }
+  
+  .mat-sidenav {
+      position: fixed;
+      top: 57px;
+      padding: 0;
+      min-width: 200px;
+      height: auto;
+      @extend .mat-sidenav-container;
+      background-color: #fafafa;
+      box-shadow: -5px 0 6px rgba(0,0,0,.1);
+  }
+
+.search .input{
+  float: right;
+}

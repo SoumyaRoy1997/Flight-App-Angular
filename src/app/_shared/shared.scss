@@ -1,0 +1,46 @@
+
+$imageUrl: "../assets/images/MW-HE536_airpla_ZH_20190225131547.jpg";
+$myimageUrl: "../../assets/images/MW-HE536_airpla_ZH_20190225131547.jpg";
+$imageUrlHeader: "../../../assets/images/MW-HE536_airpla_ZH_20190225131547.jpg";
+$myWidth: 100%;
+$myheight: 100%;
+$color: #ddd;
+
+.float-right
+{
+  float: right;
+}
+.float-left
+{
+  float: left;
+}
+.float-centre
+{
+    margin-left: 30%;
+}
+@mixin _margin($top, $bottom , $left , $right)
+{
+  top: $top;
+  left: $left;
+  bottom: $bottom;
+  right: $right;
+}
+
+.mat-spinner
+{
+  max-width: 400px;
+  margin: 2em auto;
+  text-align: center;
+  display: flex;
+}
+
+@mixin _backGroundImage() {
+    width: $myWidth;
+    height: $myheight;
+    overflow: auto;
+    background: {
+      position: center;
+      repeat: no-repeat;
+      size: cover;
+    };
+}

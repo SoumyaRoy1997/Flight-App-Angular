@@ -1,0 +1,26 @@
+@import "./_shared/shared.scss";
+
+$fontsize: 18px;
+$height: 100%;
+
+
+body, html {
+  height: $height;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.bg-image {
+  background-image: url($imageUrl);
+  @include _backGroundImage();
+}
+.app-wrapper {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  @include _margin(64px,0,0,0);
+}
+
+

@@ -1,0 +1,23 @@
+<div class="dialog">
+        <mat-dialog-content class="mat-typography">
+            <div class="card">
+                <div class="card-header card-header-danger">
+                        <h2 mat-dialog-title class="float-centre">Details for {{data.Admin.adminID}}</h2>
+                </div>
+                <div class="card-body">
+                    
+                            <form [formGroup]="AdminForm" (submit)="UpdateProfile(Password.value)">
+                                    <mat-label form="ProfilePicture">Profile Picture</mat-label>
+                                    <button class="Upload File"><input #profilepic placeholder="Profile Picture" formControlName="ProfilePicture" type="file" (change)="onFileSelect(profilepic)"></button> 
+                                    <p></p>
+                                <mat-form-field appearance="outline">
+                                      <mat-label form="Password">Password</mat-label>
+                                      <input matInput #Password placeholder="Password" formControlName="Password" type="text" > 
+                                      </mat-form-field>
+                                      <p></p>
+                                      <button class="btn btn-success" type="submit">Submit</button>
+                            </form>
+                </div>
+                </div>
+            </mat-dialog-content>
+</div>

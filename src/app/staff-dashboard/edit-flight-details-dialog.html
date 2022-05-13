@@ -1,0 +1,40 @@
+<div class="dialog">
+<mat-dialog-content class="mat-typography">
+<div class="card">
+<div class="card-header card-header-danger">
+<h2  mat-dialog-title class="float-centre">Seat Arrangement for:</h2>
+<strong><h5 mat-dialog-title class="float-centre" style="color: chocolate;">{{data.flightID}}</h5></strong>
+</div>
+<div class="card-body">
+<div class="table-container">
+        <form [formGroup]="passengerForm">
+                <div *ngFor="let passengers of t.controls; let i = index" class="grid-container">
+                            <!-- <h5 class="card-title">Ticket {{i + 1}}</h5> -->
+                            <div [formGroup]="passengers" (dblclick)="changePassenger(i)" style="cursor: pointer;">
+                                        <mat-slide-toggle
+                                      formControlName="checkin" color="primary">
+                                      {{data.Seats[i]}}
+                                        </mat-slide-toggle>
+                                        <span class="example-spacer"></span>
+                                        <span *ngIf="data.wheelchair[i]" class="material-icons">
+                                                accessible
+                                                </span>
+                                        <span *ngIf="data.meals[i]" class="material-icons">
+                                                        room_service
+                                                        </span>
+                                        <mat-icon *ngIf="data.infants[i]" svgIcon="baby"></mat-icon>
+                                        <!-- </div> -->
+                                        <!-- </button> -->
+                                        <mat-divider></mat-divider>                    
+                        </div>
+                 </div>
+        </form>
+</div>
+</div>
+</div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+ <button mat-button class="btn btn-success" [mat-dialog-close]="passengerForm" cdkFocusInitial color="accent">Update</button>
+ <button mat-button mat-dialog-close class="btn btn-danger" color="primary">Cancel</button>
+</mat-dialog-actions>
+</div>

@@ -1,0 +1,144 @@
+<mat-spinner *ngIf="isLoading"  backdropEnabled="true" positionGloballyCenter="true"></mat-spinner>
+<mat-tab-group  *ngIf="flag">
+<mat-tab  label="Passengers for Flight ID:{{id}}">
+  <div style="background-color:rgb(248, 246, 246)">
+    <button class="btn btn-info" (click)="toggle()" color="primary">Filter Passengers</button> 
+          <!-- <input matInput (keyup)="applyFilter($event)" placeholder="Search with characters" style="color: black; display: flex; flex-direction: row;"> -->
+<mat-sidenav-container *ngIf="userrole==2">
+  <mat-sidenav #sidenav mode="push" position="end" fixedInViewport="false">
+    <mat-accordion multi="true">
+        <form class="form" [formGroup]="filterForm" (submit)="Filter(filterForm)">
+            <mat-form-field color="warn">
+                <mat-label>Filter</mat-label>
+                <p><input matInput (keyup)="applyFilter($event)" placeholder="Search with characters" style="color: black;"></p>
+              </mat-form-field>
+      <p><mat-expansion-panel >
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Checkin
+          </mat-panel-title>
+        </mat-expansion-panel-header><p>
+          <mat-checkbox #checkin formControlName="checkin">Checked In Passengers</mat-checkbox></p>
+          <mat-checkbox #notcheckin formControlName="notcheckedin">Not Checked In Passengers</mat-checkbox>
+      </mat-expansion-panel></p>
+     <p> <mat-expansion-panel (opened)="panelOpenState = true"
+      (closed)="panelOpenState = false">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Wheelchair
+          </mat-panel-title>
+          <mat-panel-description>
+          </mat-panel-description>
+        </mat-expansion-panel-header><p>
+          <mat-checkbox #wheelchair formControlName="wheelchair" color="primary">Passengers with Wheelchair</mat-checkbox></p>
+          <mat-checkbox #notwheelchair formControlName="notwheelchair" color="primary">Passengers without Wheelchair</mat-checkbox>
+      </mat-expansion-panel></p>
+      <p><mat-expansion-panel (opened)="panelOpenState = true"
+        (closed)="panelOpenState = false">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Infants
+          </mat-panel-title>
+          <mat-panel-description>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <p>
+          <mat-checkbox #infants formControlName="infants" color="warn">Passengers with Infants</mat-checkbox></p>
+          <mat-checkbox #notinfants formControlName="notinfants" color="warn">Passengers with No Infants</mat-checkbox>
+      </mat-expansion-panel></p>
+      <p></p>
+      <button type="submit" class="btn btn-success" matbutton color="primary" align="end">Filter</button>
+      <p></p>
+      <button type="button" class="btn btn-danger" matbutton color="primary" align="end" (click)="clearFilter()">Clear</button>
+      </form>
+    </mat-accordion>
+  </mat-sidenav>
+</mat-sidenav-container>
+<mat-sidenav-container *ngIf="userrole==1">
+    <mat-sidenav #sidenav mode="push" position="end" fixedInViewport="false">
+      <mat-accordion multi="true">
+          <form class="form" [formGroup]="filterFormAdmin" (submit)="FilterAdminForm(filterFormAdmin)">
+              <mat-form-field color="warn">
+                  <mat-label>Filter</mat-label>
+                  <p><input matInput (keyup)="applyFilter($event)" placeholder="Search with characters" style="color: black;"></p>
+                </mat-form-field>
+        <p><mat-expansion-panel >
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Passport
+            </mat-panel-title>
+          </mat-expansion-panel-header><p>
+            <mat-checkbox #passport formControlName="passport">Passengers with passport</mat-checkbox></p>
+            <mat-checkbox #nopassport formControlName="nopassport">Passengers without passport</mat-checkbox>
+        </mat-expansion-panel></p>
+       <p> <mat-expansion-panel (opened)="panelOpenState = true"
+        (closed)="panelOpenState = false">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Address
+            </mat-panel-title>
+            <mat-panel-description>
+            </mat-panel-description>
+          </mat-expansion-panel-header><p>
+            <mat-checkbox #address formControlName="address" color="primary">Passengers with Address Details</mat-checkbox></p>
+            <mat-checkbox #noaddress formControlName="noaddress" color="primary">Passengers without Address Details</mat-checkbox>
+        </mat-expansion-panel></p>
+        <p><mat-expansion-panel (opened)="panelOpenState = true"
+          (closed)="panelOpenState = false">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Date of Birth
+            </mat-panel-title>
+            <mat-panel-description>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <p>
+            <mat-checkbox #dob formControlName="dob" color="warn">Passengers with DOB</mat-checkbox></p>
+            <mat-checkbox #nodob formControlName="nodob" color="warn">Passengers without DOB</mat-checkbox>
+        </mat-expansion-panel></p>
+        <p></p>
+        <button type="submit" class="btn btn-success" matbutton color="primary" align="end">Filter</button>
+        <p></p>
+        <button type="button" class="btn btn-danger" matbutton color="primary" align="end" (click)="clearFilter()">Clear</button>
+        </form>
+      </mat-accordion>
+    </mat-sidenav>
+  </mat-sidenav-container>    
+<div class="example-table-container"  style="background-color: #ddd;">          
+        <table mat-table [dataSource]="dataSource" multiTemplateDataRows matSort class="mat-elevation-z8">
+          <ng-container matColumnDef="Seat Number">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>Seat Number</th>
+            <td mat-cell *matCellDef="let passenger" >{{passenger.passengerflightdetails.seat_number}}</td>
+          </ng-container>
+          <ng-container matColumnDef="Passenger ID">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>Passenger ID</th>
+            <td mat-cell *matCellDef="let passenger">{{passenger.passengerflightdetails.passengerID}}</td>
+          </ng-container>
+          <ng-container matColumnDef="Passenger Name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Passenger Name</th>
+            <td mat-cell *matCellDef="let passenger" ng-reflect-message=passenger.name>{{passenger.name}}</td>
+          </ng-container>
+          <ng-container matColumnDef="Action">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
+              Actions
+            </th>
+            <td mat-cell *matCellDef="let passenger">
+                <button mat-raised-button type="button" class="mat-raised-button mat-button-base btn btn-success" matTooltip="Edit" (click)="openEditDialog(passenger)" >
+                    <span class="mat-button-wrapper"><i class="material-icons">edit</i></span>
+                    <div matripple="" class="mat-ripple mat-button-ripple">
+                    </div><div class="mat-button-focus-overlay"></div>
+                </button>
+                <button mat-raised-button type="button" *ngIf="userrole==2" class="mat-button-base btn btn-primary" matTooltip="Add Shop Items" (click)="openAddItemDialog(passenger)" [matBadge]=passenger.passengerflightdetails.items.length matBadgePosition="after" matBadgeColor="accent" ><span class="material-icons">
+                    local_grocery_store
+                    </span></button>
+            </td>
+          </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>  
+  </table>  
+  <mat-paginator #paginator [pageSize]="resultsLength" [length]="resultsLength" [pageSizeOptions]="[1,2,3 ]" showFirstLastButtons></mat-paginator>
+  </div>
+  </div>
+  </mat-tab>
+  </mat-tab-group>
+  <ng-container *ngIf="!flag && !isLoading">No passengers in this flight</ng-container>

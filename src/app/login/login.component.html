@@ -1,0 +1,42 @@
+<mat-spinner *ngIf="loading"  backdropEnabled="true" positionGloballyCenter="true"></mat-spinner>
+<mat-card *ngIf="!loading">
+    <mat-card-content>
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmitFirebase(username.value,password.value)">
+        <h2>Log In</h2>
+        <mat-error *ngIf="loginInvalid">
+          The username and password were not recognised
+        </mat-error>
+            
+        <ng-template *ngIf="">
+
+        </ng-template>
+          
+            <mat-form-field appearance="outline">
+                    <mat-label>passowrd</mat-label>
+                    <input matInput #password placeholder="passowrd" class="mdc-floating-label" id="my-label-id" aria-invalid="false" aria-required="true" [type]="hide ? 'password' : 'text'">
+                    <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                    <!-- <mat-error *ngIf="loginForm.hasError('required')">
+                      Password<strong>required</strong>
+                    </mat-error> -->
+                   
+        </mat-form-field>
+        <p>
+        <button type="submit" mat-raised-button color="primary">Login</button>
+       </p>
+        <div class="icon-group">
+        <a class="btn btn-outline-dark" (click)="googlesignin()" role="button" style="text-transform:none">
+          <img width="20px" style="margin-bottom:3px; margin-right:5px" alt="Google sign-in" src="../../assets/images/google.jpg" />
+          Login with Google
+        </a>
+        <!-- <p></p>
+        <a class="btn btn-outline-dark" href="/users/googleauth" role="button" style="text-transform:none">
+          <img width="20px" style="margin-bottom:3px; margin-right:5px" alt="Facebook sign-in" src="../../assets/images/iconfinder_square-facebook_317727.png" />
+          Login with Facebook
+        </a> -->
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+ 

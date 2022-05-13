@@ -1,0 +1,54 @@
+  <mat-toolbar color="accent">
+      <ng-container *ngIf="isAuthenticated" >
+      <button mat-icon-button (click)="clickMenu()">
+          <mat-icon>menu</mat-icon>
+        </button>
+        </ng-container>
+          <a routerLink="/" class="logo"><h1>Flight App&copy;</h1></a>
+          <!-- <a class="active" routerLink="/">Home</a>
+          <a routerLink="/">About</a> -->
+          <span class="example-spacer"></span>
+            <ng-container *ngIf="isAuthenticated" >
+                <button mat-button [matMenuTriggerFor]="menu"><span class="material-icons">account_circle</span><span class="caret"></span></button>
+                <mat-menu #menu="matMenu">
+                    <button mat-menu-item  disabled (click)="openEditDialog()">Edit Profile</button>
+                  <button mat-menu-item (click)="logoutUser()">Logout</button>
+                </mat-menu>
+        </ng-container>
+    </mat-toolbar>
+    <ng-container *ngIf="isAuthenticated" >
+    <div class="example-container" [class.example-is-mobile]="mobileQuery.matches" >
+        <mat-sidenav-container class="example-sidenav-container">
+<mat-sidenav #snav [mode]="mobileQuery.matches ? 'side' : 'side'"
+fixedInViewport="true" fixedTopGap="56">
+<mat-nav-list>
+<div class="container">
+  <div class="row">
+    <div class="col-md-4"></div>
+  <div class="col-md-4">
+<span class="material-icons">account_circle</span><span class="caret"></span>
+</div>
+<div class="col-md-4"></div>
+</div>
+</div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-2"></div>
+    <div class="col-md-8">
+      {{user.adminID}}
+  </div>
+  <div class="col-md-2"></div>
+  </div>
+  </div>
+<mat-divider></mat-divider>
+<a mat-list-item *ngIf="user.role==2" class="nav-link" routerLink="/StaffDashboard"><i class="material-icons">dashboard</i>Dashboard</a>
+<a mat-list-item *ngIf="user.role==1" class="nav-link" routerLink="/AdminDashboard"><i class="material-icons">dashboard</i>Dashboard</a>
+</mat-nav-list>
+</mat-sidenav>
+<mat-sidenav-content>
+  <router-outlet></router-outlet>
+</mat-sidenav-content>
+</mat-sidenav-container>
+</div>
+</ng-container>
+<app-footer></app-footer>

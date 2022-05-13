@@ -1,0 +1,61 @@
+<div class="dialog">
+        <mat-dialog-content class="mat-typography">
+            <div class="card">
+                <div class="card-header card-header-danger">
+                        <h2 mat-dialog-title class="float-centre">Shopping List for {{data.passenger.name}}
+                                <p>Items in cart: {{data.passenger.passengerflightdetails.items.length}}</p>
+                        </h2>
+                </div>
+                <div class="card-body">
+                        <div *ngIf="removeItems">
+                              <table class="table table-striped">
+                              <thead>
+                               <tr>
+                               <th>Item Type</th>
+                               <th>Item Name</th>
+                               <th>Price</th>
+                               <th>Add to Cart</th>
+                               </tr>
+                               </thead>
+                               <tbody *ngFor="let i of data.passenger.passengerflightdetails.items">
+                               <tr [@list1]>
+                               <td>{{i.itemType}}</td>
+                               <td>{{i.itemName}}</td>
+                               <td>{{i.price}}</td>
+                               <td><span class="material-icons" style="cursor: pointer; color: red;" (click)="_removeItems(i)" >remove_circle_outline</span></td>
+                                </tr>
+                                </tbody>
+                                </table>
+                        </div>
+                        <div *ngIf="!removeItems" [@list2]>
+                            <table class="table table-striped" *ngIf="flag; else elseBlock">
+                              <thead>
+                               <tr>
+                               <th>Item Type</th>
+                               <th>Item Name</th>
+                               <th>Price</th>
+                               <th>Add to Cart</th>
+                               </tr>
+                               </thead>
+                               <tbody *ngFor="let i of items">
+                               <tr>
+                               <td>{{i.itemType}} </td>
+                               <td>{{i.itemName}}</td>
+                               <td>{{i.price}}</td>
+                               <td><span class="material-icons" style="cursor: pointer; color:blue;" (click)="addItems(i)" [@rotateAdd]> add_circle</span></td>
+                                </tr>
+                                </tbody>
+                                </table>
+                                <ng-template #elseBlock>
+                                        <strong>No Items are available for this flight. Contact Admin to restock supplies</strong>
+                                </ng-template>
+                                </div>
+                    </div>
+                </div>
+         </mat-dialog-content>
+         <mat-dialog-actions align="end" >
+                 <button mat-button *ngIf="flag" class="btn btn-warning" (click)="delete()" color="warn">Delete Items</button>
+                 <button mat-button class="btn btn-success" color="accent" cdkFocusInitial *ngIf="flagCount" (click)="add()">Add Items</button>
+                 <button mat-button mat-dialog-close class="btn btn-danger" color="primary">Cancel</button>
+         </mat-dialog-actions>
+          </div>

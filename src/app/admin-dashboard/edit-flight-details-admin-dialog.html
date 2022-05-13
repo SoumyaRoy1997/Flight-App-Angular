@@ -1,0 +1,197 @@
+<mat-tab-group dynamicHeight>
+        <mat-tab label="Shop Items">
+        <div class="dialog">
+        <mat-dialog-content class="mat-typography">
+        <div class="card">
+        <div class="card-body">
+                <table class="table table-striped" *ngIf="data.flight.item.length>0 || isAddItem">
+                <thead>
+                 <tr>
+                 <th>Item Type</th>
+                 <th>Item Name</th>
+                 <th>Price</th>
+                 <th>Actions</th>
+                 </tr>
+                 </thead>
+                 <ng-container *ngIf="!isEditItems">
+                 <tbody *ngFor="let i of data.flight.item">
+                 <tr [@list2]>
+                 <td>{{i.itemType}}</td>
+                 <td>{{i.itemName}}</td>
+                 <td>{{i.price}}</td>
+                 <td>
+                 <i class="material-icons"  style="cursor: pointer; color:blue;" (click)="EditItems(i)" *ngIf="!isEditItems">edit</i>
+                 <span class="material-icons" style="cursor: pointer; color: red;" mat-tooltip="Delete Item" *ngIf="!isEditItems" (click)="RemoveItems(i)">cancel</span >
+                 </td>
+                 </tr>
+                </tbody>
+                </ng-container>
+                <tbody class="form-group" *ngIf="isEditItems">
+                 <tr [@list1]>
+                        <td>
+                        <input matInput placeholder="Item Type" class="form-control" #itemtype type="text" [ngModel]="editItem.itemType" > 
+                        </td>
+                        <td>
+                        <input matInput placeholder="Item Name" class="form-control" #itemname type="text" [ngModel]="editItem.itemName"> 
+                        </td>
+                        <td>
+                        <input matInput placeholder="Price" class="form-control" #Price type="text" [ngModel]="editItem.price"> 
+                        </td>
+                        <td>
+                        <button type="submit" class="btn btn-success" mat-button *ngIf="isEditItems" (click)="update(itemtype.value, itemname.value , Price.value)">Save</button>
+                        </td>
+                 </tr>
+                 </tbody>
+                 <tbody class="form-group" *ngIf="isAddItem">
+                 <tr [@list1]>
+                        <td>
+                        <input matInput placeholder="Item Type" class="form-control" #itemtype type="text"  > 
+                        </td>
+                        <td>
+                        <input matInput placeholder="Item Name" class="form-control" #itemname type="text" > 
+                        </td>
+                        <td>
+                        <input matInput placeholder="Price" class="form-control" #Price type="text" > 
+                        </td>
+                        <td>
+                        <button type="submit" class="btn btn-success" mat-button *ngIf="isAddItem" (click)="AddItems(itemtype.value, itemname.value , Price.value)">Save</button>
+                        </td>
+                 </tr>
+                 </tbody>
+                 </table>
+                 <ng-container *ngIf="data.flight.item.length==0">
+                        <h3><strong>No Items For this Flight</strong></h3>
+                 </ng-container>
+                </div>
+            </div>
+    </mat-dialog-content>
+     <mat-dialog-actions align="end">
+             <button mat-button class="btn btn-success" color="accent" cdkFocusInitial (click)="AddItem()">Add Items</button>
+             <button mat-button *ngIf="isEditItems || isAddItem" (click)="cancel()" class="btn btn-warning" color="primary" >Cancel</button>
+             <button mat-button mat-dialog-close class="btn btn-danger" color="primary" >Quit</button>
+     </mat-dialog-actions>
+      </div>
+        </mat-tab>
+        <mat-tab label="Ancillary Services">
+        <div class="dialog">
+        <mat-dialog-content class="mat-typography">
+        <div class="card">
+        <div class="card-body">
+                <table class="table table-striped" *ngIf="data.flight.services.length>0 || isAddservice">
+                <thead>
+                 <tr>
+                 <th>Service Name</th>
+                 <th>Actions</th>
+                 </tr>
+                 </thead>
+                 <ng-container *ngIf="!isEditService">
+                 <tbody *ngFor="let i of data.flight.services">
+                 <tr [@list2]>
+                 <td>{{i.serviceName}}</td>
+                 <td>
+                 <i class="material-icons"  style="cursor: pointer; color:blue;" (click)="EditServices(i)" >edit</i>
+                 <span class="material-icons" style="cursor: pointer; color: red;" mat-tooltip="Delete Item" (click)="RemoveServices(i)">cancel</span >
+                 </td>
+                 </tr>
+                </tbody>
+                </ng-container>
+                <tbody class="form-group" *ngIf="isEditService">
+                 <tr [@list1]>
+                        <td>
+                        <input matInput placeholder="Service Name" class="form-control" #servicename type="text" [ngModel]="editService.serviceName"> 
+                        </td>
+                        <td>
+                        <button type="submit" class="btn btn-success" mat-button *ngIf="isEditService" (click)="updateServices(servicename.value )">Save</button>
+                        </td>
+                 </tr>
+                 </tbody>
+                 <tbody class="form-group" *ngIf="isAddservice">
+                 <tr [@list1]>
+                        <td>
+                        <input matInput placeholder="Service Name" class="form-control" #servicename type="text" > 
+                        </td>
+                        <td>
+                        <button type="submit" class="btn btn-success" mat-button *ngIf="isAddservice" (click)="AddServices( servicename.value )">Save</button>
+                        </td>
+                 </tr>
+                 </tbody>
+                 </table>
+                 <ng-container *ngIf="data.flight.services.length==0">
+                        <h3><strong>No Ancillary Services For this Flight</strong></h3>
+                 </ng-container>
+                </div>
+            </div>
+        </mat-dialog-content>
+        <mat-dialog-actions align="end">
+             <button mat-button class="btn btn-success" color="accent" cdkFocusInitial (click)="AddService()">Add Items</button>
+             <button mat-button *ngIf="isEditService || isAddservice" (click)="cancel()" class="btn btn-warning" color="warn" >Cancel</button>
+             <button mat-button mat-dialog-close class="btn btn-danger" color="primary" >Quit</button>
+        </mat-dialog-actions>
+        </div>
+        </mat-tab>
+        <mat-tab label="Meals">
+        <div class="dialog">
+        <mat-dialog-content class="mat-typography">
+        <div class="card">
+        <div class="card-body">
+                <table class="table table-striped" *ngIf="data.flight.meal.length>0 || isAddMeal">
+                <thead>
+                 <tr> 
+                 <th>Meal Name</th>
+                 <th>Price</th>
+                 <th>Actions</th>
+                 </tr>
+                 </thead>
+                 <ng-container *ngIf="!isEditMeals">
+                 <tbody *ngFor="let i of data.flight.meal">
+                 <tr [@list2]>
+                 <td>{{i.mealName}}</td>
+                 <td>{{i.price}}</td>
+                 <td>
+                 <i class="material-icons"  style="cursor: pointer; color:blue;" (click)="EditMeals(i)" *ngIf="!isEditMeals">edit</i>
+                 <span class="material-icons" style="cursor: pointer; color: red;" mat-tooltip="Delete Item" *ngIf="!isEditMeals" (click)="RemoveMeals(i)">cancel</span >
+                 </td>
+                 </tr>
+                </tbody>
+                </ng-container>
+                <tbody class="form-group" *ngIf="isEditMeals">
+                 <tr [@list1]>
+                        <td>
+                        <input matInput placeholder="Meal Name" class="form-control" #mealname type="text" [ngModel]="editMeals.mealName"> 
+                        </td>
+                        <td>
+                        <input matInput placeholder="Price" class="form-control" #Price type="text" [ngModel]="editMeals.price"> 
+                        </td>
+                        <td>
+                        <button type="submit" class="btn btn-success" mat-button *ngIf="isEditMeals" (click)="updateMeals(mealname.value , Price.value)">Save</button>
+                        </td>
+                 </tr>
+                 </tbody>
+                 <tbody class="form-group" *ngIf="isAddMeal">
+                 <tr [@list1]>
+                        <td>
+                        <input matInput placeholder="Meal Name" class="form-control" #mealname type="text" > 
+                        </td>
+                        <td>
+                        <input matInput placeholder="Price" class="form-control" #Price type="text" > 
+                        </td>
+                        <td>
+                        <button type="submit" class="btn btn-success" mat-button *ngIf="isAddMeal" (click)="AddMeals( mealname.value , Price.value)">Save</button>
+                        </td>
+                 </tr>
+                 </tbody>
+                 </table>
+                 <ng-container *ngIf="data.flight.meal.length==0">
+                        <h3><strong>No Meals For this Flight</strong></h3>
+                 </ng-container>
+                </div>
+            </div>
+    </mat-dialog-content>
+     <mat-dialog-actions align="end">
+             <button mat-button class="btn btn-success" color="accent" cdkFocusInitial (click)="AddMeal()">Add Items</button>
+             <button mat-button *ngIf="isEditMeals || isAddMeal" (click)="cancel()" class="btn btn-warning" color="warn" >Cancel</button>
+             <button mat-button mat-dialog-close class="btn btn-danger" color="primary" >Quit</button>
+     </mat-dialog-actions>
+      </div>
+        </mat-tab>
+</mat-tab-group>

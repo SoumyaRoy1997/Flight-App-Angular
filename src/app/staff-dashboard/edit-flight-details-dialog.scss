@@ -1,0 +1,52 @@
+@import "../_shared/shared.scss";
+$display: flex;
+$myColor: burlywood;
+
+.fa,.fa-square{
+    color: #4CAF50;
+  }
+  .grid-container:nth-child(6n+3),.grid-container:nth-child(6n+1),.grid-container:nth-child(6n+2)
+  {
+    float: left;
+  }
+  .grid-container:nth-child(6n),.grid-container:nth-child(6n+4),.grid-container:nth-child(6n+5)
+  {
+    float: right;
+  }
+  .grid-container {
+    display: grid;
+    grid:
+    {
+      template-columns: auto;
+      gap: 20px;
+    };
+    padding: 10px;
+  } 
+.table-container{
+    width: $myWidth;
+}
+.mat-elevation-z8{
+    width: $myWidth;
+}
+body{
+    max-height: 20%;
+    text-decoration-color: $myColor;
+    background-color: cornflowerblue;
+   }
+
+.h5
+{
+    color: $myColor;
+}
+.dialog .mat-typography .card .card-header .card-body .table-container .list-group-item .form-group .example-spacer {
+  flex: 1 1 auto;
+}
+
+.dialog .mat-typography .card .card-header .card-body .table-container.form{
+  display: $display;
+  flex-wrap: wrap;
+}
+.form-group
+{
+  display: $display;
+}
